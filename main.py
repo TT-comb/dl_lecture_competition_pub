@@ -11,6 +11,7 @@ import torch.nn as nn
 import torchvision
 from torchvision import transforms
 
+print('hello')
 
 def set_seed(seed):
     random.seed(seed)
