@@ -1,3 +1,4 @@
+# ライブラリのインポート
 import re
 import random
 import time
@@ -11,6 +12,7 @@ import torch.nn as nn
 import torchvision
 from torchvision import transforms
 
+# 関数1 set_seed(seed)
 def set_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
@@ -20,10 +22,10 @@ def set_seed(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-
+# 関数2 process_text(text)
 def process_text(text):
     # lowercase
-    text = text.lower()
+    text = text.lower() # 文字列textを小文字にする
 
     # 数詞を数字に変換
     num_word_to_digit = {
@@ -379,7 +381,7 @@ def main():
     model = VQAModel(vocab_size=len(train_dataset.question2idx)+1, n_answer=len(train_dataset.answer2idx)).to(device)
 
     # optimizer / criterion
-    num_epoch = 1
+    num_epoch = 4
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-5)
 
