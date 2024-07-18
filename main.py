@@ -390,17 +390,17 @@ def main():
     set_seed(42) # 関数1
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    # dataloader / model
+    '''# dataloader / model
     transform = transforms.Compose([
         transforms.Resize((224, 224)), # デフォルトのデータ拡張
         transforms.ToTensor()
-    ])
+    ])'''
 
-    '''transform = transforms.Compose([
+    transform = transforms.Compose([
         transforms.Resize((224, 224)), # デフォルトのデータ拡張
         transforms.ToTensor(),
         transforms.RandomErasing(p=0.8, scale=(0.02, 0.33), ratio=(0.3, 3.3)),
-        ]) # random erasing'''
+        ]) # random erasing
 
     # train_dataset = VQADataset(df_path="./data/train.json", image_dir="./data/train", transform=transform)
     # test_dataset = VQADataset(df_path="./data/valid.json", image_dir="./data/valid", transform=transform, answer=False)
@@ -415,7 +415,7 @@ def main():
     model = VQAModel(vocab_size=len(train_dataset.question2idx)+1, n_answer=len(train_dataset.answer2idx)).to(device) # クラス5
     # print('pass 3') # for check
     # optimizer / criterion
-    num_epoch = 10
+    num_epoch = 5
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-5)
     # print('pass 4') # for check
